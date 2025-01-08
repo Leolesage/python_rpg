@@ -1,18 +1,26 @@
 import json
 
-def sauvegarder(progression, fichier="sauvegarde.json"):
-    """Sauvegarde la progression dans un fichier JSON."""
-    with open(fichier, "w") as f:
-        json.dump(progression, f)  # Sérialise les données en JSON
-    print("Partie sauvegardée avec succès !")
+def sauvegarder(joueur):
+    """Sauvegarde les données du joueur dans un fichier JSON."""
+    with open("sauvegarde.json", "w") as fichier:
+        json.dump({
+            "nom": joueur.nom,
+            "classe": joueur.classe,
+            "pv": joueur.pv,
+            "force": joueur.force,
+            "defense": joueur.defense,
+            "xp": joueur.xp,
+            "xp_niveau": joueur.xp_niveau,
+            "niveau": joueur.niveau,
+            "position": joueur.position,
+        }, fichier)
+    print("Partie sauvegardée !")
 
-def charger(fichier="sauvegarde.json"):
-    """Charge une partie depuis un fichier JSON."""
+def charger():
+    """Charge les données du joueur depuis un fichier JSON."""
     try:
-        with open(fichier, "r") as f:
-            progression = json.load(f)  # Désérialise les données JSON en Python
-        print("Partie chargée avec succès !")
-        return progression
+        with open("sauvegarde.json", "r") as fichier:
+            return json.load(fichier)
     except FileNotFoundError:
-        print("Aucune sauvegarde trouvée. Lancez une nouvelle partie.")
+        print("Aucune sauvegarde trouvée.")
         return None
