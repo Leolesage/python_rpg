@@ -17,41 +17,46 @@ def menu_principal():
 
 def nouvelle_partie():
     """Lance une nouvelle partie."""
-    joueur = {
-        "nom": "Héros",
-        "classe": "Guerrier",
-        "pv": 100,
-        "force": 20,
-        "defense": 10,
-        "xp": 0,
-        "xp_niveau": 100,
-        "inventaire": ["épée", "potion", "bouclier"],
-        "position": {"x": 0, "y": 0},
-        "niveau": 1,
-    }
-    print(f"Bienvenue, {joueur['nom']} le {joueur['classe']} !")
+    joueur = Personnage(
+        nom="Héros",
+        classe="Guerrier",
+        pv=100,
+        force=20,
+        defense=10,
+    )
+    print(f"Bienvenue, {joueur.nom} le {joueur.classe} !")
     return joueur
 
 def relancer_partie():
     """Charge une partie existante."""
     progression = charger()
     if progression:
-        print(f"Partie rechargée ! Bonjour, {progression['nom']} le {progression['classe']} !")
-    return progression
+        joueur = Personnage(
+            nom=progression["nom"],
+            classe=progression["classe"],
+            pv=progression["pv"],
+            force=progression["force"],
+            defense=progression["defense"],
+        )
+        joueur.xp = progression["xp"]
+        joueur.xp_niveau = progression["xp_niveau"]
+        print(f"Partie rechargée ! Bonjour, {joueur.nom} le {joueur.classe} !")
+        return joueur
+    return None
 
 def gagner_xp(joueur, quantite):
     """Ajoute de l'XP au joueur et gère le passage de niveau."""
-    joueur["xp"] += quantite
+    joueur.xp += quantite
     print(f"Vous gagnez {quantite} points d'XP.")
 
-    if joueur["xp"] >= joueur["xp_niveau"]:
-        joueur["xp"] -= joueur["xp_niveau"]
-        joueur["xp_niveau"] = int(joueur["xp_niveau"] * 1.5)
-        joueur["niveau"] += 1
-        print(f"Félicitations ! Vous passez au niveau {joueur['niveau']} !")
-        joueur["pv"] += 20
-        joueur["force"] += 5
-        joueur["defense"] += 3
+    if joueur.xp >= joueur.xp_niveau:
+        joueur.xp -= joueur.xp_niveau
+        joueur.xp_niveau = int(joueur.xp_niveau * 1.5)
+        joueur.niveau += 1
+        print(f"Félicitations ! Vous passez au niveau {joueur.niveau} !")
+        joueur.pv += 20
+        joueur.force += 5
+        joueur.defense += 3
 
 if __name__ == "__main__":
     joueur = None
@@ -74,7 +79,7 @@ if __name__ == "__main__":
             continue
 
         # Gameplay principal
-        while joueur and joueur["pv"] > 0:
+        while joueur and joueur.pv > 0:
             print("\n=== Actions disponibles ===")
             print("1. Explorer")
             print("2. Voir Inventaire")
@@ -83,7 +88,7 @@ if __name__ == "__main__":
 
             if action == "1":
                 direction = input("Direction (nord/sud/est/ouest) : ")
-                joueur["position"] = deplacer(joueur["position"], direction)
+                joueur.position = deplacer(joueur.position, direction)
 
                 # Simuler un combat aléatoire
                 ennemi = creer_ennemi_de_base()
@@ -108,5 +113,5 @@ if __name__ == "__main__":
             else:
                 print("Action invalide.")
 
-        if joueur and joueur["pv"] <= 0:
+        if joueur and joueur.pv <= 0:
             print("Game Over. Vous pouvez relancer une nouvelle partie.")

@@ -6,4 +6,4 @@ def afficher_statistiques(joueur):
     print(f"PV : {joueur.pv}")
     print(f"Force : {joueur.force}")
     print(f"Défense : {joueur.defense}")
-    print(f"XP : {joueur.get('xp', 0)} / {joueur.get('xp_niveau', 100)}")
+    print(f"XP : {joueur.xp} / {joueur.xp_niveau}")
