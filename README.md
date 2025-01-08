@@ -1,1 +1,1 @@
-ceci est un rpg en console re=éalisé en python 
+ceci est un rpg en console réalisé en python 
