@@ -6,7 +6,6 @@ def combat_tour_par_tour(joueur, ennemi):
         # Tour du joueur
         print("\n--- Tour du Joueur ---")
         print("1. Attaquer")
-        print("2. Défendre")
         print("3. Utiliser une potion")
         print("4. Fuir")
         choix = input("Votre choix : ")
