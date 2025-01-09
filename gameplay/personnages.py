@@ -1,41 +1,37 @@
 class Personnage:
-    def __init__(self, nom, pv, attaque_min, attaque_max):
+    """
+    Classe représentant le joueur dans le jeu.
+    """
+    def init(self, nom="Héros", pv=100, mana=50, attaque_min=10, attaque_max=20, potions=3, niveau=1):
         self.nom = nom
         self.pv = pv
+        self.mana = mana
         self.attaque_min = attaque_min
         self.attaque_max = attaque_max
-
-    def est_mort(self):
-        return self.pv <= 0
-
-
-class Joueur(Personnage):
-    def __init__(self, nom):
-        super().__init__(nom, 100, 5, 10)
-        self.niveau = 1
+        self.potions = potions
         self.xp = 0
-        self.xp_niveau_suivant = 100
-        self.potions = 3
+        self.niveau = niveau
+        self.defense_active = False
+
+    def attaquer(self):
+        import random
+        return random.randint(self.attaque_min, self.attaque_max)
 
     def utiliser_potion(self):
         if self.potions > 0:
-            self.pv += 30
-            self.potions -= 1
-            print(f"{self.nom} utilise une potion. PV restaurés : {self.pv} (Potions restantes : {self.potions})")
-        else:
-            print("Vous n'avez plus de potions !")
-
-    def gagner_xp(self, xp_gagne):
-        self.xp += xp_gagne
-        print(f"\n{self.nom} gagne {xp_gagne} points d'expérience !")
-
-        while self.xp >= self.xp_niveau_suivant:
-            self.xp -= self.xp_niveau_suivant
-            self.niveau += 1
-            self.xp_niveau_suivant += 50
             self.pv += 20
-            self.attaque_min += 2
-            self.attaque_max += 3
-            print(f" {self.nom} monte au niveau {self.niveau} !")
+            self.potions -= 1
+            print(f"{self.nom} utilise une potion et récupère 20 PV.")
+        else:
+            print(f"{self.nom} n'a plus de potions !")
 
-    
+    def activer_defense(self):
+        self.defense_active = True
+        print(f"{self.nom} se met en position défensive.")
+
+    def recevoir_degats(self, degats):
+        if self.defense_active:
+            degats = max(0, degats // 2)
+            self.defense_active = False
+        self.pv -= degats
+        print(f"{self.nom} reçoit {degats} points de dégâts.")
