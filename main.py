@@ -17,6 +17,10 @@ def jeu():
     while True:
         choix = menu_principal()
         if choix == "1":
+            nom_joueur = input("Entrez le nom de votre héros : ").strip()
+            if not nom_joueur:
+                nom_joueur = "Héros"  
+            joueur = joueur(nom=nom_joueur)
             print(f"\nBienvenue, {joueur.nom} le Guerrier !")
             while joueur.pv > 0:
                 print("\n1. Explorer")
