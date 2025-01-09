@@ -1,5 +1,5 @@
-class Personnage:
-    def __init__(self, nom="Héros"):
+class personnage:
+    def init(self, nom="Héros"):
         self.nom = nom
         self.pv = 100
         self.mana = 50
