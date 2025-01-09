@@ -20,7 +20,7 @@ def explorer(joueur):
             print("Vous trouvez une potion et la rangez dans votre sac !")
         elif objet == "Équipement":
             joueur.attaque_min += 2
-            joueur.attaque_max += 5
+            joueur.attaque_max += 4
             print("Vous trouvez une nouvelle arme qui augmente vos dégâts !")
 
     elif evenement == "rien":
