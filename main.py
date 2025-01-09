@@ -37,7 +37,8 @@ def menu_jeu(joueur):
 
 
 def nouvelle_partie():
-    joueur = Personnage()
+    pseudo=input("Entrez votre pseudo:")
+    joueur = Personnage(pseudo)
     print(f"Bienvenue, {joueur.nom} ! Vous commencez avec {joueur.pv} PV et {joueur.mana} points de mana.")
     menu_jeu(joueur)
 

@@ -1,5 +1,5 @@
 class Personnage:
-    def __init__(self, nom="Héros"):
+    def __init__(self, nom):
         """
         Représente un personnage joueur avec ses statistiques.
         """
