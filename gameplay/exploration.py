@@ -1,18 +1,28 @@
-def deplacer(position, direction):
-    """Déplace le joueur dans une direction donnée."""
-    mouvements = {
-        "nord": (0, 1),
-        "sud": (0, -1),
-        "est": (1, 0),
-        "ouest": (-1, 0),
-    }
+import random
+from gameplay.ennemis import creer_ennemi
+from gameplay.combat import combat_tour_par_tour
 
-    if direction in mouvements:
-        dx, dy = mouvements[direction]
-        position["x"] += dx
-        position["y"] += dy
-        print(f"Vous vous déplacez vers le {direction}. Nouvelle position : {position}")
-    else:
-        print("Direction invalide. Choisissez nord, sud, est ou ouest.")
 
-    return position
+def explorer(joueur):
+    print("\n=== EXPLORATION ===")
+    evenements = ["combat", "objet", "rien"]
+    evenement = random.choice(evenements)
+
+    if evenement == "combat":
+        ennemi_type = random.choice(["Gobelin", "Dragon"])
+        ennemi = creer_ennemi(ennemi_type)
+        print(f"Vous avez rencontré un {ennemi.nom} ! Préparez-vous au combat.")
+        combat_tour_par_tour(joueur, ennemi)
+
+    elif evenement == "objet":
+        objet = random.choice(["Potion", "Équipement"])
+        if objet == "Potion":
+            joueur.potions += 1
+            print("Vous trouvez une potion et la rangez dans votre sac !")
+        elif objet == "Équipement":
+            joueur.attaque_min += 2
+            joueur.attaque_max += 5
+            print("Vous trouvez une nouvelle arme qui augmente vos dégâts !")
+
+    elif evenement == "rien":
+        print("Rien d'intéressant ici... Vous continuez votre chemin.")

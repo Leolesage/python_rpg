@@ -1,18 +1,40 @@
-from gameplay.personnages import Personnage
+def combat_tour_par_tour(joueur, ennemi):
+    print("\n=== COMBAT TOUR PAR TOUR ===")
+    print(f"Un {ennemi.nom} sauvage apparaît avec {ennemi.pv} PV !")
 
-def lancer_combat(joueur, ennemi):
-    """Simule un combat entre le joueur et un ennemi."""
-    print(f"Un combat commence entre {joueur.nom} et {ennemi.nom} !")
-    
-    while joueur.est_vivant() and ennemi.est_vivant():
+    while joueur.pv > 0 and ennemi.pv > 0:
         # Tour du joueur
-        joueur.attaquer(ennemi)
-        if not ennemi.est_vivant():
-            print(f"{ennemi.nom} est vaincu !")
-            return "victoire"
+        print("\n--- Tour du Joueur ---")
+        print("1. Attaquer")
+        print("2. Défendre")
+        print("3. Utiliser une potion")
+        print("4. Fuir")
+        choix = input("Votre choix : ")
+
+        if choix == "1":
+            degats = joueur.attaquer()
+            ennemi.recevoir_degats(degats)
+        elif choix == "2":
+            joueur.activer_defense()
+        elif choix == "3":
+            joueur.utiliser_potion()
+        elif choix == "4":
+            print("Vous fuyez le combat...")
+            return
+        else:
+            print("Action invalide.")
+
+        if ennemi.pv <= 0:
+            print(f"Vous avez vaincu {ennemi.nom} !")
+            joueur.xp += ennemi.xp_donne
+            print(f"Vous gagnez {ennemi.xp_donne} XP.")
+            return
 
         # Tour de l'ennemi
-        ennemi.attaquer(joueur)
-        if not joueur.est_vivant():
-            print(f"{joueur.nom} a été vaincu...")
-            return "défaite"
+        print("\n--- Tour de l'Ennemi ---")
+        degats = ennemi.attaquer()
+        joueur.recevoir_degats(degats)
+
+        if joueur.pv <= 0:
+            print("Vous êtes vaincu !")
+            return

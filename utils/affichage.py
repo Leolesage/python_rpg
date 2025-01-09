@@ -1,9 +1,9 @@
 def afficher_statistiques(joueur):
-    """Affiche les statistiques du joueur."""
-    print("\n=== STATISTIQUES ===")
+    print("\n=== STATISTIQUES DU JOUEUR ===")
     print(f"Nom : {joueur.nom}")
-    print(f"Classe : {joueur.classe}")
-    print(f"PV : {joueur.pv}")
-    print(f"Force : {joueur.force}")
-    print(f"Défense : {joueur.defense}")
-    print(f"XP : {joueur.xp} / {joueur.xp_niveau}")
+    print(f"Points de Vie (PV) : {joueur.pv}")
+    print(f"Mana : {joueur.mana}")
+    print(f"Attaque : {joueur.attaque_min} - {joueur.attaque_max}")
+    print(f"Niveau : {joueur.niveau}")
+    print(f"Potions : {joueur.potions}")
+

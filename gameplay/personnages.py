@@ -1,24 +1,37 @@
 class Personnage:
-    def __init__(self, nom, classe, pv, force, defense):
+    """
+    Classe représentant le joueur dans le jeu.
+    """
+    def __init__(self, nom="Héros", pv=100, mana=50, attaque_min=10, attaque_max=20, potions=3, niveau=1):
         self.nom = nom
-        self.classe = classe
         self.pv = pv
-        self.force = force
-        self.defense = defense
+        self.mana = mana
+        self.attaque_min = attaque_min
+        self.attaque_max = attaque_max
+        self.potions = potions
         self.xp = 0
-        self.xp_niveau = 100
-        self.niveau = 1
-        self.position = {"x": 0, "y": 0}
+        self.niveau = niveau
+        self.defense_active = False
 
-    def est_vivant(self):
-        """Retourne True si le personnage est toujours en vie."""
-        return self.pv > 0
+    def attaquer(self):
+        import random
+        return random.randint(self.attaque_min, self.attaque_max)
 
-    def attaquer(self, cible):
-        """Attaque une cible (autre personnage)."""
-        degats = self.force - cible.defense
-        if degats > 0:
-            cible.pv -= degats
-            print(f"{self.nom} attaque {cible.nom} et inflige {degats} dégâts.")
+    def utiliser_potion(self):
+        if self.potions > 0:
+            self.pv += 20
+            self.potions -= 1
+            print(f"{self.nom} utilise une potion et récupère 20 PV.")
         else:
-            print(f"{self.nom} attaque {cible.nom} mais ne lui inflige aucun dégât.")
+            print(f"{self.nom} n'a plus de potions !")
+
+    def activer_defense(self):
+        self.defense_active = True
+        print(f"{self.nom} se met en position défensive.")
+
+    def recevoir_degats(self, degats):
+        if self.defense_active:
+            degats = max(0, degats // 2)
+            self.defense_active = False
+        self.pv -= degats
+        print(f"{self.nom} reçoit {degats} points de dégâts.")
