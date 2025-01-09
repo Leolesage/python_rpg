@@ -1,27 +1,27 @@
-import random
-from gameplay.ennemis import creer_ennemi
+from gameplay.personnages import Joueur
+from gameplay.ennemis import Gobelin, Boss
 from gameplay.combat import combat_tour_par_tour
+import random
 
-def explorer(joueur):
-    print("\n=== EXPLORATION ===")
-    evenements = ["combat", "objet", "rien"]
-    evenement = random.choice(evenements)
-
-    if evenement == "combat":
-        ennemi_type = random.choice(["Gobelin", "Dragon"])
-        ennemi = creer_ennemi(ennemi_type, joueur.niveau)
-        print(f"Vous avez rencontré un {ennemi.nom} ! Préparez-vous au combat.")
-        combat_tour_par_tour(joueur, ennemi)
-
-    elif evenement == "objet":
-        objet = random.choice(["Potion", "Équipement"])
-        if objet == "Potion":
-            joueur.potions += 1
-            print("Vous trouvez une potion et la rangez dans votre sac !")
-        elif objet == "Équipement":
-            joueur.attaque_min += 2
-            joueur.attaque_max += 5
-            print("Vous trouvez une nouvelle arme qui augmente vos dégâts !")
-
-    elif evenement == "rien":
-        print("Rien d'intéressant ici... Vous continuez votre chemin.")
+def explorer(joueur, gobelins_tues):
+    print("Vous explorez les environs...")
+    rencontre = random.choice(["gobelin", "rien"])
+    
+    if rencontre == "gobelin":
+        print("Vous rencontrez un Gobelin !")
+        ennemi = Gobelin()
+        combat_termine = combat_tour_par_tour(joueur, ennemi)
+        if not combat_termine:
+            gobelins_tues += 1
+            print(f"Gobelins vaincus : {gobelins_tues}")
+    else:
+        print("Rien à signaler lors de votre exploration.")
+    
+    # Si 10 gobelins vaincus, invoquer le boss
+    if gobelins_tues == 10:
+        print("⚠️ Un puissant ennemi approche... Le BOSS FINAL apparaît ! ⚠️")
+        boss = Boss()
+        combat_termine = combat_tour_par_tour(joueur, boss, boss=True)
+        if combat_termine:
+            return True, gobelins_tues  # Fin du jeu
+    return False, gobelins_tues
