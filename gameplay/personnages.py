@@ -28,5 +28,10 @@ class Personnage:
             self.pv += 20
             self.attaque_min += 2
             self.attaque_max += 3
-            print(f" {self.nom} monte au niveau {self.niveau} !")
+            print(f"{self.nom} monte au niveau {self.niveau} !")
             print(f"Stats actuelles : PV = {self.pv}, Attaque = {self.attaque_min}-{self.attaque_max}")
+
+# Ajout de la classe Joueur pour éviter tout problème d'import
+class Joueur(Personnage):
+    def __init__(self, nom="Héros"):
+        super().__init__(nom)
