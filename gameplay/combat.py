@@ -1,40 +1,34 @@
+import random
+
 def combat_tour_par_tour(joueur, ennemi):
-    print("\n=== COMBAT TOUR PAR TOUR ===")
-    print(f"Un {ennemi.nom} sauvage apparaît avec {ennemi.pv} PV !")
+    print(f"Un combat commence entre {joueur.nom} et {ennemi.nom} !")
 
     while joueur.pv > 0 and ennemi.pv > 0:
         # Tour du joueur
-        print("\n--- Tour du Joueur ---")
-        print("1. Attaquer")
-        print("2. Défendre")
-        print("3. Utiliser une potion")
-        print("4. Fuir")
-        choix = input("Votre choix : ")
-
-        if choix == "1":
-            degats = joueur.attaquer()
-            ennemi.recevoir_degats(degats)
-        elif choix == "2":
-            joueur.activer_defense()
-        elif choix == "3":
+        print("\n=== TOUR DU JOUEUR ===")
+        action = input("1. Attaquer  2. Utiliser une potion : ")
+        if action == "1":
+            degats = random.randint(joueur.attaque_min, joueur.attaque_max)
+            ennemi.pv -= degats
+            print(f"Vous infligez {degats} dégâts à {ennemi.nom} (PV restant : {max(ennemi.pv, 0)})")
+        elif action == "2":
             joueur.utiliser_potion()
-        elif choix == "4":
-            print("Vous fuyez le combat...")
-            return
         else:
-            print("Action invalide.")
+            print("Action invalide ! Vous perdez votre tour.")
 
+        # Vérification si l'ennemi est mort
         if ennemi.pv <= 0:
-            print(f"Vous avez vaincu {ennemi.nom} !")
-            joueur.xp += ennemi.xp_donne
-            print(f"Vous gagnez {ennemi.xp_donne} XP.")
+            print(f"Vous avez vaincu {ennemi.nom} ! 🎉")
+            joueur.gagner_xp(ennemi.xp_donne)
             return
 
         # Tour de l'ennemi
-        print("\n--- Tour de l'Ennemi ---")
-        degats = ennemi.attaquer()
-        joueur.recevoir_degats(degats)
+        print("\n=== TOUR DE L'ENNEMI ===")
+        degats = random.randint(ennemi.attaque_min, ennemi.attaque_max)
+        joueur.pv -= degats
+        print(f"{ennemi.nom} vous inflige {degats} dégâts (PV restant : {max(joueur.pv, 0)})")
 
+        # Vérification si le joueur est mort
         if joueur.pv <= 0:
-            print("Vous êtes vaincu !")
+            print("Vous êtes mort ! Game Over.")
             return
