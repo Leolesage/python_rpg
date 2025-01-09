@@ -23,11 +23,6 @@ class Personnage:
             print(f"{self.nom} utilise une potion et récupère 20 PV.")
         else:
             print(f"{self.nom} n'a plus de potions !")
-
-    def activer_defense(self):
-        self.defense_active = True
-        print(f"{self.nom} se met en position défensive.")
-
     def recevoir_degats(self, degats):
         if self.defense_active:
             degats = max(0, degats // 2)

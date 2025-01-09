@@ -14,8 +14,6 @@ def combat_tour_par_tour(joueur, ennemi):
         if choix == "1":
             degats = joueur.attaquer()
             ennemi.recevoir_degats(degats)
-        elif choix == "2":
-            joueur.activer_defense()
         elif choix == "3":
             joueur.utiliser_potion()
         elif choix == "4":
