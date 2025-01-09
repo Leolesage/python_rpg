@@ -2,7 +2,6 @@ import random
 from gameplay.ennemis import creer_ennemi
 from gameplay.combat import combat_tour_par_tour
 
-
 def explorer(joueur):
     print("\n=== EXPLORATION ===")
     evenements = ["combat", "objet", "rien"]
@@ -10,7 +9,7 @@ def explorer(joueur):
 
     if evenement == "combat":
         ennemi_type = random.choice(["Gobelin", "Dragon"])
-        ennemi = creer_ennemi(ennemi_type)
+        ennemi = creer_ennemi(ennemi_type, joueur.niveau)
         print(f"Vous avez rencontré un {ennemi.nom} ! Préparez-vous au combat.")
         combat_tour_par_tour(joueur, ennemi)
 
