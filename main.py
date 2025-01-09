@@ -1,6 +1,6 @@
 from gameplay.personnages import Personnage
 from gameplay.exploration import explorer
-from utils.affichage import afficher_statistiques
+from gameplay.statisques import afficher_statistiques
 from gameplay.inventaire import afficher_inventaire
 
 def menu_principal():
