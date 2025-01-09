@@ -6,16 +6,16 @@ def combat_tour_par_tour(joueur, ennemi):
         # Tour du joueur
         print("\n--- Tour du Joueur ---")
         print("1. Attaquer")
-        print("3. Utiliser une potion")
-        print("4. Fuir")
+        print("2. Utiliser une potion")
+        print("3. Fuir")
         choix = input("Votre choix : ")
 
         if choix == "1":
             degats = joueur.attaquer()
             ennemi.recevoir_degats(degats)
-        elif choix == "3":
+        elif choix == "2":
             joueur.utiliser_potion()
-        elif choix == "4":
+        elif choix == "3":
             print("Vous fuyez le combat...")
             return
         else:
