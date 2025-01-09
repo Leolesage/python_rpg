@@ -2,10 +2,9 @@ class Personnage:
     """
     Classe représentant le joueur dans le jeu.
     """
-    def init(self, nom="Héros", pv=100, mana=50, attaque_min=10, attaque_max=20, potions=3, niveau=1):
+    def init(self, nom="Héros", pv=100, attaque_min=10, attaque_max=20, potions=3, niveau=1):
         self.nom = nom
         self.pv = pv
-        self.mana = mana
         self.attaque_min = attaque_min
         self.attaque_max = attaque_max
         self.potions = potions
