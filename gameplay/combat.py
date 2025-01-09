@@ -1,4 +1,5 @@
 import random
+from personnages import utiliser_potion
 
 def combat_tour_par_tour(joueur, ennemi):
     print(f"Un combat commence entre {joueur.nom} et {ennemi.nom} !")
