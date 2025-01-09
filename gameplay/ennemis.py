@@ -2,7 +2,7 @@ class Ennemi:
     """
     Classe représentant un ennemi.
     """
-    def init(self, nom, pv, attaque_min, attaque_max, xp_donne):
+    def __init__(self, nom, pv, attaque_min, attaque_max, xp_donne):
         self.nom = nom
         self.pv = pv
         self.attaque_min = attaque_min
