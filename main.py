@@ -53,5 +53,5 @@ def main():
             break
         else:
             print("Choix invalide. Veuillez réessayer.")
-if name == "main":
+if __name__ == "__main__":
     main()
