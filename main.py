@@ -38,7 +38,7 @@ def menu_jeu(joueur):
             print("Choix invalide. Réessayez.")
 def nouvelle_partie():
     joueur = Personnage()
-    print(f"Bienvenue, {joueur.nom} ! Vous commencez avec {joueur.pv} PV et {joueur.mana} points de mana.")
+    print(f"Bienvenue, {joueur.nom} ! Vous commencez avec {joueur.pv} PV.")
     menu_jeu(joueur)
 def main():
     while True:
