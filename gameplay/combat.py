@@ -18,7 +18,7 @@ def combat_tour_par_tour(joueur, ennemi):
 
         # Vérification si l'ennemi est mort
         if ennemi.pv <= 0:
-            print(f"Vous avez vaincu {ennemi.nom} ! 🎉")
+            print(f"Vous avez vaincu {ennemi.nom} ! ")
             joueur.gagner_xp(ennemi.xp_donne)
             return
 
