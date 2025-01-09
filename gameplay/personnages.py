@@ -2,7 +2,6 @@ class Personnage:
     def __init__(self, nom="Héros"):
         self.nom = nom
         self.pv = 100
-        self.mana = 50
         self.attaque_min = 5
         self.attaque_max = 10
         self.niveau = 1
@@ -27,8 +26,7 @@ class Personnage:
             self.niveau += 1
             self.xp_niveau_suivant += 50  # Augmenter le seuil pour le prochain niveau
             self.pv += 20
-            self.mana += 10
             self.attaque_min += 2
             self.attaque_max += 3
-            print(f"🎉 {self.nom} monte au niveau {self.niveau} !")
+            print(f" {self.nom} monte au niveau {self.niveau} !")
             print(f"Stats actuelles : PV = {self.pv}, Attaque = {self.attaque_min}-{self.attaque_max}")
