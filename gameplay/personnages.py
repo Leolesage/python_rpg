@@ -1,5 +1,8 @@
-class personnage:
-    def init(self, nom="Héros"):
+class Personnage:
+    def __init__(self, nom="Héros"):
+        """
+        Représente un personnage joueur avec ses statistiques.
+        """
         self.nom = nom
         self.pv = 100
         self.mana = 50
@@ -11,23 +14,28 @@ class personnage:
         self.potions = 3
 
     def utiliser_potion(self):
+        """
+        Permet au joueur d'utiliser une potion pour récupérer des PV.
+        """
         if self.potions > 0:
             self.pv += 30
             self.potions -= 1
-            print(f"{self.nom} utilise une potion. PV restaurés : {self.pv} (Potions restantes : {self.potions})")
+            print(f"{self.nom} utilise une potion et récupère 30 PV ! (Potions restantes : {self.potions})")
         else:
             print("Vous n'avez plus de potions !")
 
     def gagner_xp(self, xp_gagne):
+        """
+        Ajoute des points d'expérience et gère le niveau du joueur.
+        """
         self.xp += xp_gagne
-        print(f"\n{self.nom} gagne {xp_gagne} points d'expérience !")
+        print(f"{self.nom} gagne {xp_gagne} points d'expérience !")
 
         while self.xp >= self.xp_niveau_suivant:
             self.xp -= self.xp_niveau_suivant
             self.niveau += 1
-            self.xp_niveau_suivant += 50  # Augmenter le seuil pour le prochain niveau
+            self.xp_niveau_suivant += 50
             self.pv += 20
-            self.mana += 10
             self.attaque_min += 2
             self.attaque_max += 3
             print(f"🎉 {self.nom} monte au niveau {self.niveau} !")

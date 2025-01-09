@@ -4,4 +4,4 @@ def afficher_statistiques(joueur):
     print(f"Points de Vie (PV) : {joueur.pv}")
     print(f"Attaque : {joueur.attaque_min} - {joueur.attaque_max}")
     print(f"Niveau : {joueur.niveau}")
-    print(f"Expérience : {joueur.xp} / {joueur.xp_niveau_suivant}")
+    print(f"Potions : {joueur.potions}")
