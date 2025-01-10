@@ -55,7 +55,6 @@ def charger_partie():
         # Crée une instance de Personnage avec les données chargées
         joueur = Personnage(nom=data_joueur["nom"])
         joueur.pv = data_joueur["pv"]
-        joueur.mana = data_joueur["mana"]
         joueur.niveau = data_joueur["niveau"]
         joueur.xp = data_joueur["xp"]
         joueur.xp_niveau_suivant = data_joueur["xp_niveau_suivant"]
