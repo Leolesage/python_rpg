@@ -1,3 +1,5 @@
+import sqlite3
+
 class Personnage:
     def __init__(self, nom):
         """
@@ -5,13 +7,31 @@ class Personnage:
         """
         self.nom = nom
         self.pv = 100
-        self.mana = 50
         self.attaque_min = 5
         self.attaque_max = 10
         self.niveau = 1
         self.xp = 0
         self.xp_niveau_suivant = 100
         self.potions = 3
+    
+    """def BDD(self):
+        conn = sqlite3.connect("example.db")
+        cursor = conn.cursor()
+        insert_query = ""
+        INSERT INTO users (nom, pv, xp, xp_niveau_suivant, attaque_min, attaque_max, potions)
+        VALUES (?, ?, ?);
+        ""
+        
+        users_data = [
+        (self.nom, self.pv, self.niveau,self.xp, self.xp_niveau_suivant, self.attaque_min, self.attaque_max ,self.potions ),
+        ("Bob", "bob@example.com", 25),
+        ("Charlie", "charlie@example.com", 35),
+        ]
+
+        cursor.executemany(insert_query, users_data)
+
+        conn.commit()
+        conn.close()"""
 
     def utiliser_potion(self):
         """
