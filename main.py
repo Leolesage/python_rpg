@@ -44,8 +44,9 @@ def menu_jeu(joueur, sauvegarde):
 def nouvelle_partie(sauvegarde):
     pseudo = input("Entrez votre pseudo : ")
     joueur = Personnage(pseudo)
-    print(f"Bienvenue, {joueur.nom} ! Vous commencez avec {joueur.pv} PV et {joueur.mana} points de mana.")
-    menu_jeu(joueur)
+    print(f"Bienvenue, {joueur.nom} ! Vous commencez avec {joueur.pv} PV.")
+    menu_jeu(joueur, sauvegarde)
+
 
 def charger_partie(sauvegarde):
     sauvegarde.afficher_sauvegardes()

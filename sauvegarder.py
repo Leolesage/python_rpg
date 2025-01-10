@@ -28,12 +28,23 @@ class Sauvegarde:
     def sauvegarder_joueur(self, joueur):
         """Sauvegarde les informations d'un joueur."""
         with self.conn:
-            self.conn.execute("""
-                INSERT INTO joueurs (nom, pv, mana, niveau, xp, xp_niveau_suivant, attaque_min, attaque_max, potions)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (joueur.nom, joueur.pv, joueur.niveau, joueur.xp, joueur.xp_niveau_suivant,
-                  joueur.attaque_min, joueur.attaque_max, joueur.potions))
-        print(f" La partie de {joueur.nom} a été sauvegardée avec succès.")
+            self.conn.execute(
+                """
+                INSERT OR REPLACE INTO joueurs (nom, pv, niveau, xp, xp_niveau_suivant, attaque_min, attaque_max, potions)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    joueur.nom,
+                    joueur.pv,
+                    joueur.niveau,
+                    joueur.xp,
+                    joueur.xp_niveau_suivant,
+                    joueur.attaque_min,
+                    joueur.attaque_max,
+                    joueur.potions,
+                ),
+            )
+        print(f"✅ Sauvegarde réussie pour le joueur {joueur.nom}.")
 
     def charger_joueur(self, nom):
         """Charge les informations d'un joueur à partir de la base de données."""
