@@ -5,7 +5,6 @@ class Personnage:
         """
         self.nom = nom
         self.pv = 100
-        self.mana = 50
         self.attaque_min = 5
         self.attaque_max = 10
         self.niveau = 1
