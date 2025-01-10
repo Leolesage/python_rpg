@@ -1,6 +1,6 @@
 import sqlite3
 import os
-
+import gameplay.personnages
 
 class Sauvegarde:
     def __init__(self, db_path="sauvegarde.db"):
@@ -38,8 +38,8 @@ class Sauvegarde:
         """
         with self.conn:
             self.conn.execute("""
-                INSERT INTO joueurs (nom, pv,  niveau, xp, xp_niveau_suivant, attaque_min, attaque_max, potions)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO joueurs (nom, pv, mana, niveau, xp, xp_niveau_suivant, attaque_min, attaque_max, potions)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (joueur.nom, joueur.pv, joueur.niveau, joueur.xp, joueur.xp_niveau_suivant,
                   joueur.attaque_min, joueur.attaque_max, joueur.potions))
         print(f" La partie de {joueur.nom} a été sauvegardée avec succès.")
