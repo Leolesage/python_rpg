@@ -43,7 +43,7 @@ def nouvelle_partie():
     if not pseudo:
         pseudo = "Héros"  # Nom par défaut si le joueur ne saisit rien
     joueur = Personnage(pseudo)
-    print(f"Bienvenue, {joueur.nom} ! Vous commencez avec {joueur.pv} PV et {joueur.mana} points de mana.")
+    print(f"Bienvenue, {joueur.nom} ! Vous commencez avec {joueur.pv} PV.")
     menu_jeu(joueur)
 
 def charger_partie():
